@@ -71,7 +71,6 @@ public class Spike : MonoBehaviour
             {
                 lowered = false;
             }
-            Debug.Log(("Current position %f", timeDifference));
             //ADD PARTICLE EFFECT JUST BEFORE IT RAISES
         }
         if (!lowered)
