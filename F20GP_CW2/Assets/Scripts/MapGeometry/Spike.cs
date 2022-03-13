@@ -10,7 +10,7 @@ public class Spike : MonoBehaviour
     [SerializeField] private Transform loweredPosition;
 
     //Retrieve spike cooldown
-    [SerializeField] private float maxCooldown = 1;
+    [SerializeField] private float maxCooldown = 5;
     [SerializeField] private float minCooldown = 10;
 
     //Retrieve linear interpolation ratio
@@ -18,6 +18,12 @@ public class Spike : MonoBehaviour
 
     //Retrieve tolerance before chaning direction
     [SerializeField] private float tolerance = 0.02f;
+
+    //Retrieve tolerance before chaning direction
+    [SerializeField] private ParticleSystem playerWarning;
+
+    //Retrieve tolerance before chaning direction
+    [SerializeField] private float playerWarningCooldown = 3f;
 
     private float spikeCooldown;
 
@@ -33,6 +39,7 @@ public class Spike : MonoBehaviour
     private Vector3 lPosition;
     private Vector3 endPosition;
 
+    private bool warningPlaying;
 
 
     void Start()
@@ -50,6 +57,8 @@ public class Spike : MonoBehaviour
         //Do not raise the spikes on startup
         upwards = false;
 
+        playerWarning.Stop();
+
     }
 
     // Update is called once per frame
@@ -58,7 +67,7 @@ public class Spike : MonoBehaviour
         if (lowered)
         {
             if (initialCount)
-            {
+            { 
                 startTime = Time.time;
                 initialCount = false;
             }
@@ -67,16 +76,27 @@ public class Spike : MonoBehaviour
 
             float timeDifference = currentTime - startTime;
 
+            if ((spikeCooldown - playerWarningCooldown) <= timeDifference && !warningPlaying)
+            {
+                Debug.Log("Playing particles");
+                Debug.Log(timeDifference);
+                Debug.Log(spikeCooldown);
+                warningPlaying = true;
+                playerWarning.Play();
+            }
+
             if (spikeCooldown <= timeDifference)
             {
+                playerWarning.Stop();
                 lowered = false;
+                warningPlaying = false;
             }
+
+
             //ADD PARTICLE EFFECT JUST BEFORE IT RAISES
         }
         if (!lowered)
         {
-
-
             //If the spike is to be raised
             if (upwards)
             {
