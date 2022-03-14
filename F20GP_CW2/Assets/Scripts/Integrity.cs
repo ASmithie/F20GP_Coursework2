@@ -9,6 +9,13 @@ public class Integrity : MonoBehaviour
     public float force = 0.1f;
     public float gravity = 9.81f;
 
+    public Vector3 startUp;
+
+    private void Start()
+    {
+        startUp = Vector3.up;
+    }
+
     private void OnCollisionEnter(Collision col)
     {
         Rigidbody rb = GetComponent<Rigidbody>();
