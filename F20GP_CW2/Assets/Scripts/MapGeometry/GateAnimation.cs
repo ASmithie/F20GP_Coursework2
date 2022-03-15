@@ -37,7 +37,7 @@ public class GateAnimation : MonoBehaviour
         if (!(prevButtonState) && buttonController.isPressed)
         {
             //Debug log for the changing of the gate state
-            Debug.Log("Raise/lower gate");
+            //Debug.Log("Raise/lower gate");
             //Toggle gate state based every new button press
             if (!raiseGate) raiseGate = true;
             else if (raiseGate) raiseGate = false;
