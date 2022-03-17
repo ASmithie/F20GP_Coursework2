@@ -78,9 +78,9 @@ public class Spike : MonoBehaviour
 
             if ((spikeCooldown - playerWarningCooldown) <= timeDifference && !warningPlaying)
             {
-                Debug.Log("Playing particles");
-                Debug.Log(timeDifference);
-                Debug.Log(spikeCooldown);
+                //Debug.Log("Playing particles");
+                //Debug.Log(timeDifference);
+                //Debug.Log(spikeCooldown);
                 warningPlaying = true;
                 playerWarning.Play();
             }
@@ -127,7 +127,7 @@ public class Spike : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("lowered");
+                    //Debug.Log("lowered");
                     upwards = true;
                     lowered = true;
                     initialCount = true;

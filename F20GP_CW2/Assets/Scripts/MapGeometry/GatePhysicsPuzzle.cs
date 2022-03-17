@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class GateAnimation : MonoBehaviour
+public class GatePhysicsPuzzle: MonoBehaviour
 {
     //Retrieve the button which controlls the gate
     [SerializeField] private PushButton buttonController;
@@ -34,14 +34,8 @@ public class GateAnimation : MonoBehaviour
     {
 
         //Ensure that the button only executes a single time
-        if (!(prevButtonState) && buttonController.isPressed)
-        {
-            //Debug log for the changing of the gate state
-            //Debug.Log("Raise/lower gate");
-            //Toggle gate state based every new button press
-            if (!raiseGate) raiseGate = true;
-            else if (raiseGate) raiseGate = false;
-        }
+        if (buttonController.isPressed) raiseGate = true;
+        else raiseGate = false;
 
         //If the gate is to be raised
         if (raiseGate)
