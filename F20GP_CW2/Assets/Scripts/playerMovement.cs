@@ -11,11 +11,17 @@ public class playerMovement : MonoBehaviour
     [SerializeField] private float speed = 12f;
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
+    [SerializeField]  private float jumpHeight;
+    Rigidbody rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        Rigidbody rb;
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical);
@@ -25,37 +31,43 @@ public class playerMovement : MonoBehaviour
             //focusBar.currentFocus -= focusBar.costFocus;
 
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            //transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            rb = GetComponent<Rigidbody>();
-            //rb.AddForce(moveDir * speed);
+            
 
             //Calculate the velocity vector based on the local direction of the camera
             Vector3 velocity = cam.transform.right * horizontal + FlatForwardVector(cam.transform.forward) * vertical;
+            Vector3 forcePosition = transform.position;
             //Add the velocity to the players movement
-            rb.AddForce(velocity * speed);
+            if (direction.z > 0)
+            {
+                forcePosition.z += 1;
+                rb.AddForceAtPosition(velocity * speed, forcePosition);
 
-            //playerController.Move(moveDir * speed * Time.deltaTime);
+            }
+            if (direction.x < 0)
+            {
+                forcePosition.x -= 1;
+                rb.AddForceAtPosition(velocity * speed, forcePosition);
+            }
+            if (direction.z < 0)
+            {
+                forcePosition.z -= 1;
+                rb.AddForceAtPosition(velocity * speed, forcePosition);
+            }
+            if (direction.x > 0)
+            {
+                forcePosition.x += 1;
+                rb.AddForceAtPosition(velocity * speed, forcePosition);
+            }
+            
 
         }
 
-        //original attempt at camera and player movement, causes player to violently fly away from centre when interacting with gravity
-        /*float angle = cam.eulerAngles.y;
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
-        if (Input.GetKeyDown("space") && focusBar.currentFocus >= focusBar.costFocus)
+        if (Input.GetKeyDown("space"))
         {
-            
-            
-
-            focusBar.currentFocus -= focusBar.costFocus;
-            Vector3 direction = cam.forward;
-
-            playerController.Move(direction * speed * Time.deltaTime);
-
-
-        }*/
+            rb.AddForce(Vector3.up * jumpHeight, ForceMode.VelocityChange);
+        }
     }
 
     private Vector3 FlatForwardVector(Vector3 forwardVector)
