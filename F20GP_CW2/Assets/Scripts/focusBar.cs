@@ -12,9 +12,11 @@ public class focusBar : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   //how much should the fouc bar recharge
         rechargeFocus = 0.005f;
+        //how much should it cost to use the spacebar
         costFocus = 0.05f;
+        //recharge the focus bar every 0.1 seconds
         InvokeRepeating("RechargeBar", 0.0f, 0.1f);
 
 
@@ -29,6 +31,9 @@ public class focusBar : MonoBehaviour
 
     void RechargeBar()
     {
-        currentFocus += rechargeFocus;
+        if (currentFocus < maxFocus)
+        {
+            currentFocus += rechargeFocus;
+        }
     }
 }

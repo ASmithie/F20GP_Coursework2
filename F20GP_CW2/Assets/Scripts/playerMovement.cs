@@ -5,14 +5,14 @@ using UnityEngine;
 public class playerMovement : MonoBehaviour
 {
     public CharacterController playerController;
-   
+    Rigidbody rb;
     public Transform cam;
-    
-    [SerializeField] private float speed = 12f;
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
-    [SerializeField]  private float jumpHeight;
-    Rigidbody rb;
+
+    //change these values to affect the size of player movement
+    [SerializeField] private float speed = 12f;
+    [SerializeField] private float jumpHeight = 12f;
 
     void Start()
     {
@@ -22,50 +22,53 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //get player input
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
+        //calculate vextor with player inputs
         Vector3 direction = new Vector3(horizontal, 0f, vertical);
 
-        if(direction.magnitude >= 0.1f /*&& focusBar.currentFocus > focusBar.costFocus*/)
+        //is there player input?
+        if(direction.magnitude >= 0.1f)
         {
-            //focusBar.currentFocus -= focusBar.costFocus;
-
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             
-
             //Calculate the velocity vector based on the local direction of the camera
             Vector3 velocity = cam.transform.right * horizontal + FlatForwardVector(cam.transform.forward) * vertical;
             Vector3 forcePosition = transform.position;
+
             //Add the velocity to the players movement
+            //Force is added to different parts of the player object depending on which direction the player is going
+            //This will cause the player object to rotate while moving
             if (direction.z > 0)
             {
-                forcePosition.z += 1;
+                forcePosition.z += GetComponent<Collider>().bounds.size.z;
                 rb.AddForceAtPosition(velocity * speed, forcePosition);
 
             }
             if (direction.x < 0)
             {
-                forcePosition.x -= 1;
+                forcePosition.x -= GetComponent<Collider>().bounds.size.x;
                 rb.AddForceAtPosition(velocity * speed, forcePosition);
             }
             if (direction.z < 0)
             {
-                forcePosition.z -= 1;
+                forcePosition.z -= GetComponent<Collider>().bounds.size.z;
                 rb.AddForceAtPosition(velocity * speed, forcePosition);
             }
             if (direction.x > 0)
             {
-                forcePosition.x += 1;
+                forcePosition.x += GetComponent<Collider>().bounds.size.x;
                 rb.AddForceAtPosition(velocity * speed, forcePosition);
             }
             
 
         }
-
-        if (Input.GetKeyDown("space"))
+        //check if the player wants to jump and is there budget in the focus bar to do so
+        if (Input.GetKeyDown("space") && focusBar.currentFocus > focusBar.costFocus)
         {
+            //remove some focus
+            focusBar.currentFocus -= focusBar.costFocus;
+            //add force upwards to the player object
             rb.AddForce(Vector3.up * jumpHeight, ForceMode.VelocityChange);
         }
     }
