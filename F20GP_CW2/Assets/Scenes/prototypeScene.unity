@@ -4021,9 +4021,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 90626567}
     m_Modifications:
+    - target: {fileID: 1894581530565038, guid: 6217b7b03b1e2194e9953f612b2ecc07, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1979091929981870, guid: 6217b7b03b1e2194e9953f612b2ecc07, type: 3}
       propertyPath: m_Name
       value: Sword01_LowPoly
+      objectReference: {fileID: 0}
+    - target: {fileID: 1979091929981870, guid: 6217b7b03b1e2194e9953f612b2ecc07, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4929189680492214, guid: 6217b7b03b1e2194e9953f612b2ecc07, type: 3}
       propertyPath: m_RootOrder

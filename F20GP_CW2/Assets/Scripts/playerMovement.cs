@@ -39,6 +39,12 @@ public class playerMovement : MonoBehaviour
             //Add the velocity to the players movement
             //Force is added to different parts of the player object depending on which direction the player is going
             //This will cause the player object to rotate while moving
+
+
+            rb.AddForce(velocity * speed);
+
+            /*
+             
             if (direction.z > 0)
             {
                 forcePosition.z += GetComponent<Collider>().bounds.size.z;
@@ -60,7 +66,7 @@ public class playerMovement : MonoBehaviour
                 forcePosition.x += GetComponent<Collider>().bounds.size.x;
                 rb.AddForceAtPosition(velocity * speed, forcePosition);
             }
-            
+            */
 
         }
         //check if the player wants to jump and is there budget in the focus bar to do so
