@@ -6,6 +6,7 @@ public class playerMovement : MonoBehaviour
 {
     public CharacterController playerController;
     Rigidbody rb;
+    public Collider triggerCollider;
     public Transform cam;
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
@@ -17,6 +18,7 @@ public class playerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        triggerCollider = GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -39,28 +41,32 @@ public class playerMovement : MonoBehaviour
             //Add the velocity to the players movement
             //Force is added to different parts of the player object depending on which direction the player is going
             //This will cause the player object to rotate while moving
+
+
+            //rb.AddForce(velocity * speed);
+
             if (direction.z > 0)
             {
-                forcePosition.z += GetComponent<Collider>().bounds.size.z;
+                forcePosition.y += triggerCollider.bounds.size.y/2;
                 rb.AddForceAtPosition(velocity * speed, forcePosition);
 
             }
             if (direction.x < 0)
             {
-                forcePosition.x -= GetComponent<Collider>().bounds.size.x;
+                forcePosition.z -= triggerCollider.bounds.size.z / 2;
                 rb.AddForceAtPosition(velocity * speed, forcePosition);
             }
             if (direction.z < 0)
             {
-                forcePosition.z -= GetComponent<Collider>().bounds.size.z;
+                forcePosition.y -= triggerCollider.bounds.size.y / 2;
                 rb.AddForceAtPosition(velocity * speed, forcePosition);
             }
             if (direction.x > 0)
             {
-                forcePosition.x += GetComponent<Collider>().bounds.size.x;
+                forcePosition.z += triggerCollider.bounds.size.z / 2;
                 rb.AddForceAtPosition(velocity * speed, forcePosition);
             }
-            
+
 
         }
         //check if the player wants to jump and is there budget in the focus bar to do so
