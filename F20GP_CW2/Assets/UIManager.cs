@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            bossNameField.text = "";
+            bossNameField.text = "No boss name";
 
         }
 

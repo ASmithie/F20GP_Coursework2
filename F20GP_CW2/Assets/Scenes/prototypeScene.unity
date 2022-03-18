@@ -3405,6 +3405,7 @@ GameObject:
   - component: {fileID: 1649515659}
   - component: {fileID: 1649515661}
   - component: {fileID: 1649515660}
+  - component: {fileID: 1649515662}
   m_Layer: 5
   m_Name: levelLabel
   m_TagString: Untagged
@@ -3473,6 +3474,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649515658}
   m_CullTransparentMesh: 1
+--- !u!114 &1649515662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649515658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a37f31512e01cd249a2ed0a3c2ea90ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossActive: 1
+  bossName: Test Name
+  bossNameField: {fileID: 630836990}
+  level: {fileID: 1100260765}
 --- !u!1 &1695603163
 GameObject:
   m_ObjectHideFlags: 0
