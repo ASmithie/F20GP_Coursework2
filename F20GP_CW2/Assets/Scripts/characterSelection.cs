@@ -51,9 +51,9 @@ public class characterSelection : MonoBehaviour
 
     public void confirm()
     {
-        vcam.Follow = characterList[characterIndex].transform;
-        vcam.LookAt = characterList[characterIndex].transform;
-        playerMovement script = characterList[characterIndex].GetComponent<playerMovement>();
+        vcam.Follow = characterList[characterIndex].transform.GetChild(0);
+        vcam.LookAt = characterList[characterIndex].transform.GetChild(0);
+        playerMovement script = characterList[characterIndex].transform.GetChild(0).GetComponent<playerMovement>();
         script.enabled = true;
         thirdpersoncamera.SetActive(true);
         canvas.SetActive(false);
