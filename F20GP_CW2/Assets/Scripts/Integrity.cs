@@ -10,6 +10,8 @@ public class Integrity : MonoBehaviour
     public float gravity = 9.81f;
     public float tiltModifier = 1f;
 
+    public bool useTilt = true; 
+
     private void Update()
     {
         Debug.DrawRay(transform.position, Vector3.up, Color.cyan, 5);
@@ -21,21 +23,24 @@ public class Integrity : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         float velocity = rb.velocity.magnitude;
 
-        Debug.Log(Vector3.up);
-        Debug.Log(transform.up);
-        Debug.Log(Vector3.Distance(Vector3.up, transform.up));
-
-        if (Vector3.Distance(Vector3.up, transform.up) > 0.1f)
+        if (useTilt)
         {
-            tiltModifier = Vector3.Distance(Vector3.up, transform.up);
-            Debug.Log("---------------------------------hit------------------------------");
+            if (Vector3.Distance(Vector3.up, transform.up) > 0.1f)
+            {
+                tiltModifier = Vector3.Distance(Vector3.up, transform.up);
+                
             
+            }
+            else 
+            {
+                tiltModifier = 1;
+            }
+            integrityDecrease = force * gravity * tiltModifier * Mathf.Abs(velocity);
         }
-        else 
+        else
         {
-            tiltModifier = 1;
+            integrityDecrease = force * gravity * Mathf.Abs(velocity);
         }
-        integrityDecrease = force * gravity * tiltModifier * Mathf.Abs(velocity);
         integrity-= integrityDecrease;
     }
 }

@@ -13,7 +13,8 @@ public class BossHealth : MonoBehaviour
         
         if (col.gameObject.CompareTag("Player"))
         {
-            Debug.Log("player hit");
+            Debug.Log("boss hit");
+            health -= 10;
         }
     }
 }
