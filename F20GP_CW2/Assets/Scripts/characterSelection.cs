@@ -22,6 +22,7 @@ public class characterSelection : MonoBehaviour
             characterList[i].SetActive(false);
         }
         characterList[0].SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
 
 
     }
@@ -57,5 +58,6 @@ public class characterSelection : MonoBehaviour
         script.enabled = true;
         thirdpersoncamera.SetActive(true);
         canvas.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
