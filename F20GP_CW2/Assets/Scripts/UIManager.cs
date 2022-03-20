@@ -188,7 +188,7 @@ public class UIManager : MonoBehaviour
 
     //pause menu methods
     public void Resume()
-    {
+    { 
         Cursor.lockState = CursorLockMode.Locked;
         isPaused = false;
         PauseUI.SetActive(false);
