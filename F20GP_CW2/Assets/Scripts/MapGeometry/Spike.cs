@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Spike : MonoBehaviour
 {
+
+    //Retrieve the transforms of the spike geometry
+    [SerializeField] private Transform thisObject;
+    [SerializeField] private Transform parentObject;
+
     //Retrieve the spike open position
     [SerializeField] private Transform raisedPosition;
     //Retrieve the spike closed position
@@ -58,6 +63,11 @@ public class Spike : MonoBehaviour
         upwards = false;
 
         playerWarning.Stop();
+
+        //Ignore collisions between the turning rigid bodies and the obstacles in the map
+        Physics.IgnoreLayerCollision(7, 7);
+        Physics.IgnoreLayerCollision(6, 7);
+        Physics.IgnoreLayerCollision(6, 6);
 
     }
 
