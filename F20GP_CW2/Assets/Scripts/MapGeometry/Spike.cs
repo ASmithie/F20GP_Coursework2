@@ -30,6 +30,9 @@ public class Spike : MonoBehaviour
     //Retrieve tolerance before chaning direction
     [SerializeField] private float playerWarningCooldown = 3f;
 
+    //Retrieve tolerance before chaning direction
+    [SerializeField] private float spikeForce = 50f;
+
     private float spikeCooldown;
 
     private float startTime;
@@ -152,6 +155,18 @@ public class Spike : MonoBehaviour
     {
         //Linearly interpolate the position of the spike towards the end position
         transform.localPosition = Vector3.Lerp(transform.localPosition, endPosition, lerpRatio);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            //Apply force to the global y 
+            collision.rigidbody.AddForce(Vector3.up * spikeForce, ForceMode.Impulse);
+
+            //Add damage to player
+
+        }
     }
 
 }

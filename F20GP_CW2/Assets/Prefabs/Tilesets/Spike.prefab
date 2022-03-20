@@ -527,10 +527,11 @@ MonoBehaviour:
   loweredPosition: {fileID: 8970324370005262166}
   maxCooldown: 1
   minCooldown: 10
-  lerpRatio: 0.05
+  lerpRatio: 0.15
   tolerance: 0.02
   playerWarning: {fileID: 6220849774402100380}
   playerWarningCooldown: 3
+  spikeForce: 50
 --- !u!54 &645927211358430424
 Rigidbody:
   m_ObjectHideFlags: 0
