@@ -11,6 +11,9 @@ public class characterSelection : MonoBehaviour
     public CinemachineFreeLook vcam;
 
     public GameObject canvas;
+    public GameObject GameUI;
+
+    public static GameObject selectedChar;
 
     // Start is called before the first frame update
     void Start()
@@ -54,8 +57,10 @@ public class characterSelection : MonoBehaviour
     {
         vcam.Follow = characterList[characterIndex].transform.GetChild(0);
         vcam.LookAt = characterList[characterIndex].transform.GetChild(0);
+        selectedChar = characterList[characterIndex];
         playerMovement script = characterList[characterIndex].transform.GetChild(0).GetComponent<playerMovement>();
         script.enabled = true;
+        GameUI.SetActive(true);
         thirdpersoncamera.SetActive(true);
         canvas.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;

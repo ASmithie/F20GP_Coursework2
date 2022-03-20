@@ -784,7 +784,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202006192}
-  m_LocalRotation: {x: 0.15086423, y: 1e-45, z: -0, w: 0.98855454}
+  m_LocalRotation: {x: 0.15433192, y: -0.000000008500118, z: 0.0000000013277471, w: 0.9880191}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1570,7 +1570,7 @@ GameObject:
   - component: {fileID: 414926187}
   - component: {fileID: 414926186}
   m_Layer: 5
-  m_Name: Canvas (2)
+  m_Name: GameUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3164,7 +3164,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204654737}
-  m_LocalRotation: {x: 0.13285795, y: 1e-45, z: -0, w: 0.9911351}
+  m_LocalRotation: {x: 0.13633482, y: -0.000000017045725, z: 0.0000000023458289, w: 0.9906628}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3637,8 +3637,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695603163}
-  m_LocalRotation: {x: 0.13285798, y: -0.0000000020033506, z: -2.686985e-10, w: 0.9911351}
-  m_LocalPosition: {x: 41.97867, y: 19.207153, z: -18.627922}
+  m_LocalRotation: {x: 0.13633482, y: -0.00000001732328, z: 0.000000002307588, w: 0.9906629}
+  m_LocalPosition: {x: 41.97867, y: 17.991028, z: -14.637273}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 90626567}
@@ -4281,6 +4281,7 @@ MonoBehaviour:
   force: 0.01
   gravity: 9.81
   tiltModifier: 1
+  useTilt: 1
 --- !u!136 &1868473415
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4663,7 +4664,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1940178811}
-  m_LocalRotation: {x: 0.11485545, y: -0.000000017618557, z: 0.0000000020370685, w: 0.9933822}
+  m_LocalRotation: {x: 0.11834031, y: 0.0000000042713695, z: -5.090522e-10, w: 0.99297315}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

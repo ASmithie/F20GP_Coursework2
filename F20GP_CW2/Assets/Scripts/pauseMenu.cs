@@ -8,6 +8,7 @@ public class pauseMenu : MonoBehaviour
     public static bool isPaused = false;
     public GameObject pausePanel;
     public GameObject selectionPanel;
+    public GameObject gameUI;
 
     void Update ()
     {
@@ -28,6 +29,7 @@ public class pauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         isPaused = false;
         pausePanel.SetActive(false);
+        gameUI.SetActive(true);
         Time.timeScale = 1f;
     }
 
@@ -47,6 +49,7 @@ public class pauseMenu : MonoBehaviour
         isPaused = true;
         pausePanel.SetActive(true);
         Time.timeScale = 0f;
+        gameUI.SetActive(false);
     }
 }
 

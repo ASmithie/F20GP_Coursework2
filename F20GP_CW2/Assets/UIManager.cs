@@ -11,21 +11,34 @@ public class UIManager : MonoBehaviour
 
     private static Image focusBarImage;
     private static Image healthBarImage;
+    private static Image bossBarImage;
 
     private GameObject playerObject;
     private Integrity playerIntegrity;
 
+    private BossHealth bossIntegrity;
+
     public Text bossNameField;
     public Text level;
+
+    public GameObject characterSelectionUI;
+    public GameObject pauseMenuUI;
+    public GameObject mainUI;
+
+    public GameObject boss;
 
     // Start is called before the first frame update
     void Start()
     {
-        bossName = "";
+        bossName = " ";
         focusBarImage = GameObject.Find("focusBar").GetComponent<Image>();
         healthBarImage = GameObject.Find("healthBar").GetComponent<Image>();
-        playerObject = GameObject.Find("Sword02_LowPoly (1)");
-        playerIntegrity = playerObject.GetComponent<Integrity>();
+        bossBarImage = GameObject.Find("bossHealth").GetComponent<Image>();
+
+        playerObject = characterSelection.selectedChar;
+        playerIntegrity = playerObject.transform.GetChild(0).GetComponent<Integrity>();
+
+        bossIntegrity = boss.GetComponent<BossHealth>();
     }
 
     // Update is called once per frame
@@ -34,7 +47,7 @@ public class UIManager : MonoBehaviour
         if (bossActive)
         {
             bossNameField.text = bossName;
-
+            bossBarImage.fillAmount = bossIntegrity.health / 100;
         }
         else
         {
