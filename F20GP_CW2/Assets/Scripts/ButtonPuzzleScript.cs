@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PushButton : MonoBehaviour
+public class ButtonPuzzleScript : MonoBehaviour
 {
     // Start is called before the first frame update
 
@@ -45,6 +45,7 @@ public class PushButton : MonoBehaviour
         }
 
         Physics.IgnoreLayerCollision(8, 9);
+        Physics.IgnoreLayerCollision(9, 8);
     }
 
     // Update is called once per frame
@@ -54,7 +55,7 @@ public class PushButton : MonoBehaviour
         currentButtonExtention = buttonPlate.transform.position.y;
 
         //Check if the button is in its default state
-        if (currentButtonExtention >= (maxYPoisition - 0.002))
+        if (currentButtonExtention >= maxYPoisition)
         {
             //Ensure that the button does not exceed its max position
             buttonPlate.position = new Vector3(buttonPlate.position.x, maxYPoisition, buttonPlate.position.z);
@@ -69,20 +70,17 @@ public class PushButton : MonoBehaviour
         }
 
         //If the button is below its default state apply force to push it back up
-
-
-        //If the current position is within the threshold then set the button pressed state to true
-        if (currentButtonExtention < (minYPoisition + pressedThreshold))
-        {
-
-            //Set the button state to true
-            isPressed = true;
-        }
-
         if (currentButtonExtention < maxYPoisition)
         {
             //Apply a set force to the button to push it back up to the default state
             buttonPlate.GetComponent<Rigidbody>().AddForce(buttonPlate.transform.up * pushbackForce * Time.deltaTime);
+        }
+
+        //If the current position is within the threshold then set the button pressed state to true
+        if (currentButtonExtention < (minYPoisition + pressedThreshold))
+        {
+            //Set the button state to true
+            isPressed = true;
         }
     }
 }
