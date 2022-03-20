@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
     public GameObject GameUI;
     public GameObject PauseUI;
     public GameObject BossUI;
-    //public GameObject GameOverUI;
+    public GameObject GameOverUI;
     public GameObject CharacterSelectionUI;
 
     //character selector
@@ -44,6 +44,8 @@ public class UIManager : MonoBehaviour
     //pause menu
     public static bool isPaused = false;
 
+    private bool gameOver;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +54,7 @@ public class UIManager : MonoBehaviour
         GameUI.SetActive(true);
         PauseUI.SetActive(true);
         BossUI.SetActive(true);
-        //GameOverUI.SetActive(true);
+        GameOverUI.SetActive(true);
         CharacterSelectionUI.SetActive(true);
 
         //game ui setup
@@ -71,46 +73,65 @@ public class UIManager : MonoBehaviour
         characterList[0].SetActive(true);
         Cursor.lockState = CursorLockMode.None;
 
+        gameOver = false;
+
         //ui panel setup
         MainMenuUI.SetActive(true);
         InstructionsUI.SetActive(false);
         GameUI.SetActive(false);
         PauseUI.SetActive(false);
         BossUI.SetActive(false);
-        //GameOverUI.SetActive(false);
+        GameOverUI.SetActive(false);
         CharacterSelectionUI.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (trigger.bossTrigger)
-        {
-            BossUI.SetActive(true);
-            bossNameField.text = bossName;
-            bossBarImage.fillAmount = bossIntegrity.health / 100;
-        }
-        else
-        {
-            BossUI.SetActive(false);
-        }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !CharacterSelectionUI.active)
+        if (!gameOver)
         {
-            if (isPaused)
+
+            if (trigger.bossTrigger)
             {
-                Resume();
-            } else
-            {
-                Pause();
+                BossUI.SetActive(true);
+                bossNameField.text = bossName;
+                bossBarImage.fillAmount = bossIntegrity.health / 100;
             }
+            else
+            {
+                BossUI.SetActive(false);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape) && !CharacterSelectionUI.active)
+            {
+                if (isPaused)
+                {
+                    Resume();
+                }
+                else
+                {
+                    Pause();
+                }
+            }
+            if (GameUI.active)
+            {
+                playerIntegrity = selectedChar.transform.GetChild(0).GetComponent<Integrity>();
+                focusBarImage.fillAmount = focusBar.currentFocus;
+                healthBarImage.fillAmount = playerIntegrity.integrity / 10;
+
+                if (playerIntegrity.integrity <= 0)
+                {
+                    gameOver = true;
+                    GameUI.SetActive(false);
+                    BossUI.SetActive(false);
+                    GameOverUI.SetActive(true);
+                    Cursor.lockState = CursorLockMode.None;
+                }
+            }
+
         }
-        if (GameUI.active)
-        {
-            playerIntegrity = selectedChar.transform.GetChild(0).GetComponent<Integrity>();
-            focusBarImage.fillAmount = focusBar.currentFocus;
-            healthBarImage.fillAmount = playerIntegrity.integrity / 10;
-        }
+        
         
 
     }
