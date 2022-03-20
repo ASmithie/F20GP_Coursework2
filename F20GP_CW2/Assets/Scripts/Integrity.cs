@@ -42,5 +42,11 @@ public class Integrity : MonoBehaviour
             integrityDecrease = force * gravity * Mathf.Abs(velocity);
         }
         integrity-= integrityDecrease;
+
+        if (col.gameObject.CompareTag("Spike"))
+        {
+            //Spike negative health
+            integrity -= 10f;
+        }
     }
 }
