@@ -7,14 +7,12 @@ using Cinemachine;
 public class UIManager : MonoBehaviour
 {
     //game ui
-    public bool bossActive;
     public string bossName;
 
     private static Image focusBarImage;
     private static Image healthBarImage;
     private static Image bossBarImage;
 
-    private GameObject playerObject;
     private Integrity playerIntegrity;
 
     private BossHealth bossIntegrity;
@@ -24,11 +22,14 @@ public class UIManager : MonoBehaviour
 
     public GameObject boss;
 
+    [SerializeField] private BossTrigger trigger;
+
     //ui panels
     public GameObject MainMenuUI;
     public GameObject InstructionsUI;
     public GameObject GameUI;
     public GameObject PauseUI;
+    public GameObject BossUI;
     //public GameObject GameOverUI;
     public GameObject CharacterSelectionUI;
 
@@ -50,11 +51,11 @@ public class UIManager : MonoBehaviour
         InstructionsUI.SetActive(true);
         GameUI.SetActive(true);
         PauseUI.SetActive(true);
+        BossUI.SetActive(true);
         //GameOverUI.SetActive(true);
         CharacterSelectionUI.SetActive(true);
 
         //game ui setup
-        bossName = " ";
         focusBarImage = GameObject.Find("focusBar").GetComponent<Image>();
         healthBarImage = GameObject.Find("healthBar").GetComponent<Image>();
         bossBarImage = GameObject.Find("bossHealth").GetComponent<Image>();
@@ -75,6 +76,7 @@ public class UIManager : MonoBehaviour
         InstructionsUI.SetActive(false);
         GameUI.SetActive(false);
         PauseUI.SetActive(false);
+        BossUI.SetActive(false);
         //GameOverUI.SetActive(false);
         CharacterSelectionUI.SetActive(false);
     }
@@ -82,15 +84,15 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (bossActive)
+        if (trigger.bossTrigger)
         {
+            BossUI.SetActive(true);
             bossNameField.text = bossName;
             bossBarImage.fillAmount = bossIntegrity.health / 100;
         }
         else
         {
-            bossNameField.text = "No boss name";
-
+            BossUI.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && !CharacterSelectionUI.active)
@@ -105,8 +107,7 @@ public class UIManager : MonoBehaviour
         }
         if (GameUI.active)
         {
-            playerObject = selectedChar;
-            playerIntegrity = playerObject.transform.GetChild(0).GetComponent<Integrity>();
+            playerIntegrity = selectedChar.transform.GetChild(0).GetComponent<Integrity>();
             focusBarImage.fillAmount = focusBar.currentFocus;
             healthBarImage.fillAmount = playerIntegrity.integrity / 10;
         }
@@ -191,6 +192,7 @@ public class UIManager : MonoBehaviour
         PauseUI.SetActive(true);
         Time.timeScale = 0f;
         GameUI.SetActive(false);
+        BossUI.SetActive(false);
     }
 
 }
