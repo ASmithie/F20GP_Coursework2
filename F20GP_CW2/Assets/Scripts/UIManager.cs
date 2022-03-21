@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
     public GameObject BossUI;
     public GameObject GameOverUI;
     public GameObject CharacterSelectionUI;
+    public GameObject WinUI;
 
     //character selector
     public Transform characters;
@@ -58,6 +59,7 @@ public class UIManager : MonoBehaviour
         BossUI.SetActive(true);
         GameOverUI.SetActive(true);
         CharacterSelectionUI.SetActive(true);
+        WinUI.SetActive(true);
 
         //game ui setup
         focusBarImage = GameObject.Find("focusBar").GetComponent<Image>();
@@ -85,13 +87,14 @@ public class UIManager : MonoBehaviour
         BossUI.SetActive(false);
         GameOverUI.SetActive(false);
         CharacterSelectionUI.SetActive(false);
+        WinUI.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (!gameOver)
+        if (!gameOver && !boss.GetComponent<BossHealth>().bossDead)
         {
 
             if (trigger.bossTrigger)
@@ -133,6 +136,13 @@ public class UIManager : MonoBehaviour
                 }
             }
 
+        }else if (boss.GetComponent<BossHealth>().bossDead)
+        {
+            gameOver = true;
+            WinUI.SetActive(true);
+            GameUI.SetActive(false);
+            BossUI.SetActive(false);
+            Cursor.lockState = CursorLockMode.None;
         }
         
         
