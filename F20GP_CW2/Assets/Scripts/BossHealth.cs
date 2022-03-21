@@ -6,6 +6,7 @@ public class BossHealth : MonoBehaviour
 {
 
     public float health = 100;
+    public bool bossDead = false;
 
 
     private void OnTriggerEnter(Collider col)
@@ -15,6 +16,11 @@ public class BossHealth : MonoBehaviour
         {
             Debug.Log("boss hit");
             health -= 10;
+
+            if (health <= 0)
+            {
+                bossDead = true;
+            }
         }
     }
 }
