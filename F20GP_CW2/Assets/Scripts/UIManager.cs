@@ -46,6 +46,8 @@ public class UIManager : MonoBehaviour
 
     private bool gameOver;
 
+    playerMovement script;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -122,6 +124,7 @@ public class UIManager : MonoBehaviour
 
                 if (playerIntegrity.integrity <= 0)
                 {
+                    script.enabled = false;
                     gameOver = true;
                     GameUI.SetActive(false);
                     BossUI.SetActive(false);
@@ -178,7 +181,7 @@ public class UIManager : MonoBehaviour
         vcam.Follow = characterList[characterIndex].transform.GetChild(0);
         vcam.LookAt = characterList[characterIndex].transform.GetChild(0);
         selectedChar = characterList[characterIndex];
-        playerMovement script = characterList[characterIndex].transform.GetChild(0).GetComponent<playerMovement>();
+        script = characterList[characterIndex].transform.GetChild(0).GetComponent<playerMovement>();
         script.enabled = true;
         GameUI.SetActive(true);
         CharacterSelectionUI.SetActive(false);
