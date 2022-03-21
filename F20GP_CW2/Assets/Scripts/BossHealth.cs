@@ -5,18 +5,19 @@ using UnityEngine;
 public class BossHealth : MonoBehaviour
 {
 
-    public float health = 100;
+    public float health = 150;
     public bool bossDead = false;
+    public float healthDecrease;
 
-
-    private void OnTriggerEnter(Collider col)
+    private void OnCollisionEnter(Collision col)
     {
         
         if (col.gameObject.CompareTag("Player"))
         {
             Debug.Log("boss hit");
-            health -= 10;
-
+            healthDecrease = col.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
+            health -= healthDecrease;
+            Debug.Log(healthDecrease);
             if (health <= 0)
             {
                 bossDead = true;
