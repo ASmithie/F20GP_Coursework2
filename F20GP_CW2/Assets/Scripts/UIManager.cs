@@ -123,7 +123,7 @@ public class UIManager : MonoBehaviour
             {
                 playerIntegrity = selectedChar.transform.GetChild(0).GetComponent<Integrity>();
                 focusBarImage.fillAmount = focusBar.currentFocus;
-                healthBarImage.fillAmount = playerIntegrity.integrity / 10;
+                healthBarImage.fillAmount = playerIntegrity.integrity / 100f;
 
                 if (playerIntegrity.integrity <= 0)
                 {
