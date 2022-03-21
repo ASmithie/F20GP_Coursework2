@@ -20,30 +20,32 @@ public class Integrity : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        float velocity = rb.velocity.magnitude;
-
-        if(velocity >= 1)
+        if (!col.gameObject.CompareTag("Boss"))
         {
-            if (useTilt)
+            Rigidbody rb = GetComponent<Rigidbody>();
+            float velocity = rb.velocity.magnitude;
+            if(velocity >= 1)
             {
-                if (Vector3.Distance(Vector3.up, transform.up) > 0.1f)
+                if (useTilt)
                 {
-                    tiltModifier = Vector3.Distance(Vector3.up, transform.up);
+                    if (Vector3.Distance(Vector3.up, transform.up) > 0.1f)
+                    {
+                        tiltModifier = Vector3.Distance(Vector3.up, transform.up);
                 
             
+                    }
+                    else 
+                    {
+                        tiltModifier = 1;
+                    }
+                    integrityDecrease = force * gravity * tiltModifier * Mathf.Abs(velocity);
                 }
-                else 
+                else
                 {
-                    tiltModifier = 1;
+                    integrityDecrease = force * gravity * Mathf.Abs(velocity);
                 }
-                integrityDecrease = force * gravity * tiltModifier * Mathf.Abs(velocity);
+                integrity-= integrityDecrease;
             }
-            else
-            {
-                integrityDecrease = force * gravity * Mathf.Abs(velocity);
-            }
-            integrity-= integrityDecrease;
         }
 
 
