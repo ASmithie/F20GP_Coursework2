@@ -73,7 +73,7 @@ public class playerMovement : MonoBehaviour
         if (Input.GetKeyDown("space") && focusBar.currentFocus > focusBar.costFocus)
         {
             //remove some focus
-            focusBar.currentFocus -= focusBar.costFocus;
+            focusBar.currentFocus -= focusBar.costFocus * 5f;
             //add force upwards to the player object
             rb.AddForce(Vector3.up * jumpHeight, ForceMode.VelocityChange);
         }
