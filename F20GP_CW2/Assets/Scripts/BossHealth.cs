@@ -17,6 +17,7 @@ public class BossHealth : MonoBehaviour
             Debug.Log("boss hit");
             healthDecrease = col.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
             health -= healthDecrease;
+            Debug.Log(health);
             Debug.Log(healthDecrease);
             if (health <= 0)
             {

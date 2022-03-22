@@ -99,9 +99,10 @@ public class UIManager : MonoBehaviour
 
             if (trigger.bossTrigger)
             {
+                //Debug.Log("BOSS HEALTH");
                 BossUI.SetActive(true);
                 bossNameField.text = bossName;
-                bossBarImage.fillAmount = bossIntegrity.health / 100;
+                bossBarImage.fillAmount = bossIntegrity.health / 150f;
             }
             else
             {
