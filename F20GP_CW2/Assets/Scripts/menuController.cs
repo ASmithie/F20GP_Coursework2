@@ -10,7 +10,7 @@ public class menuController : MonoBehaviour
 
     public void play()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Level1 Animation");
     }
 
     public void instructions()

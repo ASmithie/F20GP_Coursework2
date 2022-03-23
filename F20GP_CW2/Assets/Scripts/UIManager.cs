@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
-
+using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     //game ui
@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MainMenuUI.SetActive(true);
+        //MainMenuUI.SetActive(true);
         InstructionsUI.SetActive(true);
         GameUI.SetActive(true);
         PauseUI.SetActive(true);
@@ -80,13 +80,13 @@ public class UIManager : MonoBehaviour
         gameOver = false;
 
         //ui panel setup
-        MainMenuUI.SetActive(true);
+        //MainMenuUI.SetActive(true);
         InstructionsUI.SetActive(false);
         GameUI.SetActive(false);
         PauseUI.SetActive(false);
         BossUI.SetActive(false);
         GameOverUI.SetActive(false);
-        CharacterSelectionUI.SetActive(false);
+        CharacterSelectionUI.SetActive(true);
         WinUI.SetActive(false);
     }
 
@@ -212,7 +212,8 @@ public class UIManager : MonoBehaviour
 
     public void MainMenu()
     {
-        Application.LoadLevel(Application.loadedLevel);
+        //Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene("mainMenu");
     }
 
     public void Quit()
