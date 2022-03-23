@@ -73,6 +73,7 @@ public class UIManager : MonoBehaviour
         {
             characterList[i] = characters.GetChild(i).gameObject;
             characterList[i].SetActive(false);
+            characterList[i].transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
         }
         characterList[0].SetActive(true);
         Cursor.lockState = CursorLockMode.None;
@@ -194,6 +195,7 @@ public class UIManager : MonoBehaviour
         selectedChar = characterList[characterIndex];
         script = characterList[characterIndex].transform.GetChild(0).GetComponent<playerMovement>();
         script.enabled = true;
+        characterList[characterIndex].transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = false;
         GameUI.SetActive(true);
         CharacterSelectionUI.SetActive(false);
         thirdpersoncamera.SetActive(true);
