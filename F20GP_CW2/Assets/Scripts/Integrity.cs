@@ -12,6 +12,8 @@ public class Integrity : MonoBehaviour
 
     public bool useTilt = true; 
 
+    [SerializeField] private float minimumDecrease = 1f;
+
     private void Update()
     {
         Debug.DrawRay(transform.position, Vector3.up, Color.cyan, 5);
@@ -44,7 +46,13 @@ public class Integrity : MonoBehaviour
                 {
                     integrityDecrease = force * gravity * Mathf.Abs(velocity);
                 }
-                integrity-= integrityDecrease;
+
+                //If the force exceeds a threshold decrease in force
+                if (integrityDecrease > minimumDecrease)
+                {
+                    integrity -= integrityDecrease;
+                }
+                
             }
         }
 
