@@ -212,8 +212,8 @@ public class UIManager : MonoBehaviour
 
     public void MainMenu()
     {
-        //Application.LoadLevel(Application.loadedLevel);
-        SceneManager.LoadScene("mainMenu");
+        Application.LoadLevel(Application.loadedLevel);
+        //SceneManager.LoadScene("mainMenu");
     }
 
     public void Quit()
